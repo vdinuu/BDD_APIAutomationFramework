@@ -4,5 +4,5 @@ Feature: Verify delete place API
   Scenario: Verify delete place API
     Given delete place API payload
     When user calls "DeletePlaceAPI" with "POST" Http request
-    Then Api call is success with status code 201
+    Then Api call is success with status code 200
     And "status" in response body is "OK"
