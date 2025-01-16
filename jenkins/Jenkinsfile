@@ -8,9 +8,9 @@ pipeline {
     stages {
         stage('GIT Checkout') {
             script {
-                git branch: 'develop',
+                git(branch: 'develop',
                         credentialsId: 'GitHub_643',
-                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
+                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git')
             }
         }
         stage('Execute test cases') {
