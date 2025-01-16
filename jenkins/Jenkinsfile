@@ -1,6 +1,20 @@
 pipeline {
     agent any
 
+    parameters {
+        [
+                choice(
+                        name: 'ENVIRONMENT',
+                        choices: ['dev', 'test', 'prod'],
+                        description: 'Select the environment',
+                        defaultValue: 'dev'
+                ),
+                string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
+        ]
+    }
+    def environment = params.ENVIRONMENT
+    def tag = params.TAG
+
     stages {
         stage('GIT Checkout') {
             steps {
@@ -11,7 +25,7 @@ pipeline {
         }
         stage('Execute test cases') {
             steps {
-                bat 'mvn clean test'
+                bat 'mvn clean test "-Dcucumber.filter.tags=@${tag}'
             }
         }
     }
