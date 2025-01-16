@@ -7,11 +7,9 @@ pipeline {
 
     stages {
         stage('GIT Checkout') {
-            script {
-                git branch: 'develop',
-                        credentialsId: 'GitHub_643',
-                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
-            }
+            git branch: 'develop',
+                    credentialsId: 'GitHub_643',
+                    url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
         }
         stage('Execute test cases') {
             sh 'mvn clean test'
