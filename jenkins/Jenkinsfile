@@ -8,17 +8,36 @@ pipeline {
     stages {
         stage('GIT Checkout') {
             steps {
+                echo "*********Git checkout code*********"
                 git branch: 'develop',
                         credentialsId: 'GitHub_643',
                         url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
             }
         }
         stage('Execute test cases') {
-            steps {
-                bat """
+            steps
+            echo "*********Executing test cases**********"
+            bat """
                     mvn clean test "-Dcucumber.filter.tags=@${params.TAG}"
                     """
+        }
+        stage('Generate HTML Report') {
+            steps {
+                echo "*********Generating HTML report*********"
+                bat 'allure serve allure-results'
             }
+        }
+        stage('Publish HTML report'){
+            steps{
+                echo "*********Publishing HTML report*********"
+                allure includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
+            }
+        }
+    }
+    post {
+        always {
+            // Clean up the allure results after the build (optional)
+            cleanWs()
         }
     }
 }
