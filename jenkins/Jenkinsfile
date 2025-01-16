@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    options {
+        ansiColor('xterm')
+    }
+
+    stages {
+        stage('GIT Checkout') {
+            script {
+                git branch: 'develop',
+                        credentialsId: 'GitHub_643',
+                        url: ''
+            }
+        }
+        stage('Execute test cases') {
+            sh 'mvn clean test'
+        }
+    }
+}
