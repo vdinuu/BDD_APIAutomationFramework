@@ -10,7 +10,7 @@ pipeline {
             script {
                 git branch: 'develop',
                         credentialsId: 'GitHub_643',
-                        url: ''
+                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
             }
         }
         stage('Execute test cases') {
