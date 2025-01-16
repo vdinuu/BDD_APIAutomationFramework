@@ -34,10 +34,4 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            // Clean up the allure results after the build (optional)
-            cleanWs()
-        }
-    }
 }
