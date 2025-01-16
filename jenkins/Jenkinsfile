@@ -15,11 +15,12 @@ pipeline {
             }
         }
         stage('Execute test cases') {
-            steps
-            echo "*********Executing test cases**********"
-            bat """
+            steps {
+                echo "*********Executing test cases**********"
+                bat """
                     mvn clean test "-Dcucumber.filter.tags=@${params.TAG}"
                     """
+            }
         }
         stage('Generate HTML Report') {
             steps {
@@ -27,8 +28,8 @@ pipeline {
                 bat 'allure serve allure-results'
             }
         }
-        stage('Publish HTML report'){
-            steps{
+        stage('Publish HTML report') {
+            steps {
                 echo "*********Publishing HTML report*********"
                 allure includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
             }
