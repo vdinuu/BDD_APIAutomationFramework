@@ -25,13 +25,13 @@ pipeline {
         stage('Generate HTML Report') {
             steps {
                 echo "*********Generating HTML report*********"
-                bat 'allure serve allure-results'
+                bat 'allure generate allure-results'
             }
         }
         stage('Publish HTML report') {
             steps {
                 echo "*********Publishing HTML report*********"
-                allure includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]
+                allure includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-report']]
             }
         }
     }
