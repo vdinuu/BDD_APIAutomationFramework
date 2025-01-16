@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     parameters {
-        choice(
-                name: 'ENVIRONMENT',
-                choices: ['dev', 'test', 'prod'],
-                description: 'Select the environment',
-                defaultValue: 'dev'
-        )
         string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
     }
 
