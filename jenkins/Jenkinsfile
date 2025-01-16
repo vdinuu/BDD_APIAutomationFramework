@@ -10,8 +10,6 @@ pipeline {
         )
         string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
     }
-    def environment = params.ENVIRONMENT
-    def tag = params.TAG
 
     stages {
         stage('GIT Checkout') {
@@ -23,7 +21,7 @@ pipeline {
         }
         stage('Execute test cases') {
             steps {
-                bat 'mvn clean test "-Dcucumber.filter.tags=@${tag}'
+                bat 'mvn clean test "-Dcucumber.filter.tags=@${params.TAG}'
             }
         }
     }
