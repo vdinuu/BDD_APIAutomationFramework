@@ -25,7 +25,7 @@ pipeline {
         stage('Generate HTML Report') {
             steps {
                 echo "*********Generating HTML report*********"
-                bat 'allure generate allure-results'
+                bat 'allure generate allure-results --clean'
             }
         }
         //Make sure to install HTML publisher plugin before using this stage
