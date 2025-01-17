@@ -28,10 +28,16 @@ pipeline {
                 bat 'allure generate allure-results'
             }
         }
+        //Make sure to install HTML publisher plugin before using this stage
         stage('Publish HTML report') {
             steps {
-                echo "*********Publishing HTML report*********"
-                allure includeProperties: false, jdk: '', reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-report']]
+                publishHTML(target: [
+                        reportName: 'API Test Execution report', // Name of the report
+                        reportDir: 'allure-report',          // Directory containing the HTML report
+                        reportFiles: 'index.html',   // The specific HTML file to publish
+                        keepAll: true,                // Keeps all previous reports (optional)
+                        alwaysLinkToLastBuild: true   // Always link to the last build (optional)
+                ])
             }
         }
     }
